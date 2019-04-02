@@ -27,17 +27,18 @@ soup = BeautifulSoup(html, 'html.parser')
 
 ###soup.select()###
 h1 = soup.select("div#main > h1") #div 태그에서 id=main인것 중에 하위에 h1인 태그
-print('h1', h1) #print('h1', type(h1))
-print('h1', type(h1)) #<class 'list'>, 리스트 타입이다. 그래서...
-print('h1', h1[0].string)
+print(type(h1)) #<class 'list'>, 리스트 타입이다. 그래서...
+print(h1) #print('h1', type(h1))
+print(h1[0].string)
 #또는
 for z in h1:
     print(z.string)
 
 ###soup.select_one###
 h1_1 = soup.select_one("div#main > h1")
-print("h1_1:", h1_1) #<h1>강의목록</h1>
-print('h1_1:', h1_1.string) #강의목록
+print(type(h1_1)) #<class 'bs4.element.Tag'>
+print(h1_1) #<h1>강의목록</h1>
+print(h1_1.string) #강의목록
 '''
 둘의 차이점은
 가지고 올때 딱 하나면 select_one을 사용하고, 그게 아니면 select사용한다.

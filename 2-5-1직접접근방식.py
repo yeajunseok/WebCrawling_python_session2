@@ -16,7 +16,6 @@ baseUrl = "https://test.com/html/a.html"
 #print(">>", urljoin(baseUrl,"../img/img.jpg")) #결과: >> https://test.com/img/img.jpg
 
 from bs4 import BeautifulSoup
-
 html = """
 <html><body>
   <h1>파이썬 BeautifulSoup 공부</h1>
