@@ -22,6 +22,11 @@ soup = BeautifulSoup(html, 'html.parser')
 
 ######CSS선택자를 이용한######
 ##select() 사용법##
+se1_1 = soup.select("div#main > ul.lecs > li")
+print(se1_1)        #결과: [<li>Java 초고수 되기</li>, <li>파이썬 기초 프로그래밍</li>, <li>파이썬 머신러닝 프로그래밍</li>, <li>안드로이드 블루투스 프로그래밍</li>]
+for s in se1_1:
+    print(s.string) #결과: Java 초고수 되기 / 파이썬 기초 프로그래밍 / 파이썬 머신러닝 프로그래밍 / 안드로이드 블루투스 프로그래밍
+
 se1 = soup.select("div#main > h1")
 print(type(se1))     #결과: <class 'list'>
 print(se1)           #결과: [<h1>강의목록</h1>]
@@ -30,11 +35,6 @@ for z in se1:
     print(z.string)
                     #결과: 강의목록
 
-se1_1 = soup.select("div#main > ul.lecs > li")
-print(se1_1)        #결과: [<li>Java 초고수 되기</li>, <li>파이썬 기초 프로그래밍</li>, <li>파이썬 머신러닝 프로그래밍</li>, <li>안드로이드 블루투스 프로그래밍</li>]
-for s in se1_1:
-    print(s.string) #결과: Java 초고수 되기 / 파이썬 기초 프로그래밍 / 파이썬 머신러닝 프로그래밍 / 안드로이드 블루투스 프로그래밍
-
 ##select_one() 사용법##
 se2 = soup.select_one("div#main > h1")
 print(type(se2))    #결과: <class 'bs4.element.Tag'>
@@ -42,7 +42,8 @@ print(se2)          #결과: <h1>강의목록</h1>
 print(se2.string)   #결과: 강의목록
 
 ##select와 select_one의 차이점##
-##가지고 올때 딱 하나면 select_one을 사용하고, 그게 아니면 select사용한다.
+#가지고 올때 딱 하나면 select_one을 사용하고, 그게 아니면 select사용한다.
+#select_one은 tag 타입이고, select는 list타입니다.
 
 ######정규식을 이용한######
 ##select_one과 select##
@@ -62,3 +63,10 @@ for ac in soup.find_all("li"):
         print('data-lo == us', ac.string)
                                                                 #결과: data-lo == us 스테이크
                                                                 #     data-lo == us 맥주
+
+'''
+select와 find의 차이점
+https://stackoverflow.com/questions/38028384/beautifulsoup-is-there-a-difference-between-find-and-select-python-3-x
+select finds multiple instances and returns a list, find finds the first, so they don't do the same thing. select_one would be the equivalent to find.
+I almost always use css selectors when chaining tags or using tag.classname, if looking for a single element without a class I use find. Essentially it comes down to the use case and personal preference.
+'''

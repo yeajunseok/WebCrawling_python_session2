@@ -22,9 +22,17 @@ html = """
 
 soup = BeautifulSoup(html, 'html.parser')
 
-links_1 = soup.find_all("a") #a태그를 link변수에 한방에 담는다.
-print('links:', type(links_1)) #<class 'bs4.element.ResultSet'>
-print(links_1) #[<a href="http://www.naver.com">naver</a>, <a href="http://www.daum.net">daum</a>, <a href="https://www.google.com">google</a>, <a href="https://www.tistory.com">tistory</a>]
+links_1 = soup.find_all("a") #a태그들을 모두 link변수에 담는다.
+print('find_all 타입: ', type(links_1)) #결과: <class 'bs4.element.ResultSet'>
+print(links_1)
+    #결과: [<a href="http://www.naver.com">naver</a>, <a href="http://www.daum.net">daum</a>, <a href="https://www.google.com">google</a>, <a href="https://www.tistory.com">tistory</a>]
+
+links1 = soup.find("a") #첫번째 a태그만 담는다.
+print('find 타입: ', type(links1)) #결과: <class 'bs4.element.Tag'>
+print(links1)
+    #결과: <a href="http://www.naver.com">naver</a>
+print(links1.string) #결과: naver
+print(links1.attrs['href']) #결과: http://www.naver.com
 
 for a in links_1:
     print('a:', type(a), a)
@@ -32,10 +40,9 @@ for a in links_1:
             #a: <class 'bs4.element.Tag'> <a href="http://www.daum.net">daum</a>
             #a: <class 'bs4.element.Tag'> <a href="https://www.google.com">google</a>
             #a: <class 'bs4.element.Tag'> <a href="https://www.tistory.com">tistory</a>
-    text = a.string
-    href = a.attrs['href']
-    print('text:', text) #text: naver
-    print('href:', href) #href: http://www.naver.com
+    print(a.string) #text: naver
+    print(a.attrs['href']) #href: http://www.naver.com
+
 
 links_2 = soup.find_all("a", string="daum")
 print('links_2:',links_2)
